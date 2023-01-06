@@ -11,6 +11,9 @@ const lightTheme = createTheme({
     },
     secondary: {
       main: "#FC624D"
+    },
+    black:{
+      main:'#000000'
     }
   },
   typography: {
