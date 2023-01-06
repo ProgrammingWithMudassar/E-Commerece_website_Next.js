@@ -15,7 +15,7 @@ const Navbar = () => {
       <AppBar position="static" sx={{ padding: '0 80px' }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <NextLink href='/' className={style.LinkDecoration}>
-            <Typography color='secondary' fontSize={28} fontWeight={600} className={style.brand}>LOGO</Typography>
+            <Typography color='secondary' fontSize={28} fontWeight={600} className={style.brand}>Easy_Buy</Typography>
           </NextLink>
           <Box display="flex" alignItems='center'>
             <Typography variant="" color="initial" mr={3} style={{cursor:'pointer'}}>cart</Typography>

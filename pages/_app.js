@@ -16,9 +16,7 @@ const MyApp = (props) => {
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={lightTheme}>
         <CssBaseline />
-        <Layout>
           <Component {...pageProps} />
-        </Layout>
       </ThemeProvider>
     </CacheProvider>
   );
