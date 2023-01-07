@@ -9,18 +9,19 @@ import CardMedia from '@mui/material/CardMedia'
 import NextLink from 'next/link'
 import styles from '../styles/Navbar.module.css'
 import Layout from '../src/components/Layout'
+import db from '../Helper/initDB'
+import Product from '../Models/product'
 
 
 
-
-export default function Home() {
+export default function Home({products}) {
   return (
     <>
       <Layout>
         <Typography variant="h4" mt={4} fontWeight={900}>Products</Typography>
         <Grid container spacing={4} my={2}>
           {
-            data.products.map((product) => (
+            products.map((product) => (
               <Grid item key={product.name} >
                 <Card sx={{ maxWidth: 345 }} >
                   <NextLink href={`/product/${product.slug}`}>
@@ -47,4 +48,17 @@ export default function Home() {
       </Layout>
     </>
   )
+}
+
+
+export async function getStaticProps(context) {
+  await db.connect();
+  const products = await Product.find({}).lean();
+  await db.disconnect();
+
+  return {
+    props: {
+      products : products.map(db.convertDocToObj)
+    }, // will be passed to the page component as props
+  }
 }

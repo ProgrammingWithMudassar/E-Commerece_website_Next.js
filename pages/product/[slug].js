@@ -7,12 +7,14 @@ import Layout from '../../src/components/Layout'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import NextLink from 'next/link'
+import Product from '../../Models/product'
+import db from '../../Helper/initDB'
 
 
-const ProductScreen = () => {
-    const router = useRouter();
-    const { slug } = router.query;
-    const product = data.products.find((e) => e.slug === slug)
+const ProductScreen = ({ product}) => {
+    // const router = useRouter();
+    // const { slug } = router.query;
+    // const product = data.products.find((e) => e.slug === slug)
     
     if (!product) {
         return (
@@ -39,3 +41,19 @@ const ProductScreen = () => {
 }
 
 export default ProductScreen
+
+
+export async function getServerSideProps(context) {
+    const {params} = context;
+    const {slug} = params;
+
+    await db.connect();
+    const product = await Product.findOne({ slug }).lean();
+    await db.disconnect();
+  
+    return {
+      props: {
+        product : db.convertDocToObj(product)
+      }
+    }
+  }
