@@ -18,7 +18,11 @@ const Navbar = () => {
             <Typography color='secondary' fontSize={28} fontWeight={600} className={style.brand}>Easy_Buy</Typography>
           </NextLink>
           <Box display="flex" alignItems='center'>
-            <Typography variant="" color="initial" mr={3} style={{cursor:'pointer'}}>cart</Typography>
+            <Typography variant="" color="initial" mr={3} style={{cursor:'pointer'}}>
+              <NextLink href="/CartItemPage">
+                cart
+              </NextLink>
+            </Typography>
             <Button color='black'>Login</Button>
           </Box>
         </Toolbar>

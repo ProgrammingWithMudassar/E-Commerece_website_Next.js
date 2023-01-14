@@ -6,6 +6,7 @@ import Footer from './Footer/Footer'
 import styles from '../../styles/Home.module.css'
 
 const Layout = ({title, children }) => {
+
   return (
     <>
       <Head>

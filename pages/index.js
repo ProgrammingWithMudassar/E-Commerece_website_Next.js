@@ -1,29 +1,38 @@
-import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Grid'
-import data from '../Data/ProductData.js'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
-import Button from '@mui/material/Button'
-import CardMedia from '@mui/material/CardMedia'
+import { 
+  Grid, Card, CardContent,
+  CardActions, Button,
+  CardMedia, Typography
+} from '@mui/material'
 import NextLink from 'next/link'
 import styles from '../styles/Navbar.module.css'
 import Layout from '../src/components/Layout'
 import db from '../Helper/initDB'
 import Product from '../Models/product'
+import { useDispatch } from 'react-redux'
+// import { decrement, increment } from '../Redux/Reducer'
+import { addToCart } from '../Redux/CartSlice'
+import { useRouter } from 'next/router'
 
 
 
 export default function Home({products}) {
+  const router = useRouter();
+  const dispatch = useDispatch()
+
+  const HanldeDispatch = (product)=>{
+    dispatch(addToCart(product));
+    router.push('/CartItemPage')
+  }
+
   return (
     <>
       <Layout>
         <Typography variant="h4" mt={4} fontWeight={900}>Products</Typography>
-        <Grid container spacing={4} my={2}>
+        <Grid container spacing={4} my={2} >
           {
             products.map((product) => (
               <Grid item key={product.name} >
-                <Card sx={{ maxWidth: 345 }} >
+                <Card sx={{ maxWidth: 345, boxShadow:'0 0 8px 2px  rgb(173, 173, 173)' }}>
                   <NextLink href={`/product/${product.slug}`}>
                     <CardMedia
                       component="img" alt="green iguana"
@@ -36,7 +45,7 @@ export default function Home({products}) {
                     <Typography variant="body2" fontWeight={900}>Price :  ${product.price}</Typography>
                   </CardContent>
                   <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <Button variant='contained' color='secondary' style={{ marginRight: '10px' }}>Add to cart</Button>
+                    <Button variant='contained' color='secondary' style={{ marginRight: '10px' }} onClick={()=>HanldeDispatch(product)}>Add to cart</Button>
                     <NextLink href={`/product/${product.slug}`} className={styles.LinkDecoration}>
                       <Button variant='contained' color='secondary' >More Detail</Button>
                     </NextLink>

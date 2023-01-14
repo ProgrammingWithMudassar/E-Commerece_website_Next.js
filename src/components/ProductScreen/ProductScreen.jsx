@@ -3,8 +3,18 @@ import Image from 'next/image'
 import {
   Grid, List, ListItem, Typography, Card, CardContent, CardActions, Button
 } from '@mui/material'
+import { addToCart } from '../../../Redux/CartSlice';
+import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router'
 
 const ProductScreen = ({ products }) => {
+  const router = useRouter();
+  const dispatch = useDispatch()
+
+  const HanldeDispatch = (product) => {
+    dispatch(addToCart(product));
+    router.push('/CartItemPage')
+  }
   return (
     <>
       <Grid container spacing={2} mt={3}>
@@ -14,6 +24,7 @@ const ProductScreen = ({ products }) => {
             alt={products.name}
             width={500}
             height={500}
+            style={{ boxShadow: '0 0 8px 2px  rgb(173, 173, 173)', borderRadius: '10px' }}
           />
         </Grid>
         {/* product details  */}
@@ -52,7 +63,7 @@ const ProductScreen = ({ products }) => {
                 </Grid>
               </ListItem>
               <ListItem>
-                <Button fullWidth>  Add to cart </Button>
+                <Button fullWidth onClick={() => HanldeDispatch(products)}>  Add to cart </Button>
               </ListItem>
             </List>
           </Card>
