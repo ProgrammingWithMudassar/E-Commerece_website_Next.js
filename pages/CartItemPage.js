@@ -17,8 +17,10 @@ const cartItemPage = () => {
                 cartItems.length === 0 ? (
                     <Box sx={{ textAlign: 'center' }}>
                         <Typography variant="" color="initial">Shopping cart Item page.</Typography>
-                        <NextLink href="/">
-                            <Typography variant="" color="initial">Go Back</Typography>
+                        <NextLink href="/" style={{textDecoration:'none'}}>
+                            <Button variant="text" color="primary" >
+                              Go Back
+                            </Button>
                         </NextLink>
                     </Box>) : (
                     <div>
@@ -47,7 +49,7 @@ const cartItemPage = () => {
                                                             </TableCell>
                                                             <TableCell> <Typography variant="" color="initial">{item.name}</Typography> </TableCell>
                                                             <TableCell> <Typography variant="" color="initial">{item.price}$</Typography> </TableCell>
-                                                            <TableCell>
+                                                            {/* <TableCell>
                                                                 <Select
                                                                     value={item.quantity}
                                                                     onChange={(e) =>
@@ -59,11 +61,11 @@ const cartItemPage = () => {
                                                                         </MenuItem>
                                                                     ))}
                                                                 </Select>
-                                                            </TableCell>
+                                                            </TableCell> */}
+                                                            <TableCell>1</TableCell>
                                                             <TableCell></TableCell>
                                                         </TableRow>
-                                                    )
-                                                })}
+                                                    )})}
                                         </TableBody>
                                     </Table>
                                 </TableContainer>
@@ -73,8 +75,7 @@ const cartItemPage = () => {
                             </Grid>
                         </Grid>
                     </div>
-                )
-            }
+                )}
         </Layout>
     )
 }

@@ -15,7 +15,6 @@ const MyApp = (props) => {
       <CssBaseline />
       <Provider store={store}>
         <Component {...pageProps} />
-        
       </Provider>
     </ThemeProvider>
   );
